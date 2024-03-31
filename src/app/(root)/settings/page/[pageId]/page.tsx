@@ -6,9 +6,9 @@ import { Separator } from "@/components/ui/Separator";
 import { eq } from "drizzle-orm";
 import { FC } from "react";
 import { posts } from "@/lib/db/schema/post";
-import Post from "@/components/Post/Post";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/Button";
+import ModeratorPost from "@/components/Post/ModeratorPost";
 
 interface pageProps {
   params: {
@@ -66,7 +66,7 @@ const page: FC<pageProps> = async ({ params }) => {
         <div className="flex flex-col gap-4">
           {pageposts.map((post, index) => (
             <Card>
-              <Post key={post.id} post={post} />
+              <ModeratorPost key={post.id} post={post} />
             </Card>
           ))}
         </div>

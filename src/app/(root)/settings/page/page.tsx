@@ -12,6 +12,7 @@ import { Link as LinkIcon } from "lucide-react";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { FC } from "react";
+import Link from "next/link";
 
 interface pageProps {}
 
@@ -47,10 +48,10 @@ const page: FC<pageProps> = async ({}) => {
         {yourPages &&
           yourPages.map((page) => (
             <div key={page.id}>
-              <CardContent className="flex flex-row justify-between">
+              <CardContent className="flex flex-row justify-between p-6">
                 <div className="flex items-center gap-3">
                   <img
-                    className="h-10 w-10 object-cover"
+                    className="h-16 w-16 object-cover rounded-sm"
                     alt={page.name + " logo"}
                     src={
                       page.pageImageUrl
@@ -61,11 +62,10 @@ const page: FC<pageProps> = async ({}) => {
                   <div className="flex flex-col">
                     <p className="text-md">{page.name}</p>
                     <p className="text-small text-default-500">
-                      <LinkIcon
-                        href={`/org/${page.orgId}/page/${page.id}`}
-                      >
+                      <Link href={`/settings/page/${page.id}`} className="flex items-center justify-center underline">
+                        <LinkIcon className="h-4"/>
                         page/{page.id}
-                      </LinkIcon>
+                      </Link>
                     </p>
                   </div>
                 </div>

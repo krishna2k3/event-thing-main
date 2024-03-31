@@ -79,7 +79,7 @@ const CreatePageForm: FC<pageProps> = ({}) => {
 
     onSuccess: (data) => {
       const { name } = data.message;
-      toast(`Organization created`, {
+      toast(`Page created`, {
         description: `${name} was created successfully`,
       });
       createPageForm.reset();

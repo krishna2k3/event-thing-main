@@ -135,8 +135,7 @@ export const Editor: React.FC<EditorProps> = ({ pageId }) => {
               uploader: {
                 async uploadByFile(file: File) {
                   // upload to uploadthing
-                  const [res] = await uploadFiles({
-                    endpoint: "postImageUploader",
+                  const [res] = await uploadFiles("postImageUploader", {
                     files: [file],
                   });
 
@@ -145,6 +144,7 @@ export const Editor: React.FC<EditorProps> = ({ pageId }) => {
                     success: 1,
                     file: {
                       url: res.url,
+                      fileKey: res.key,
                     },
                   };
                 },

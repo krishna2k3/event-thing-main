@@ -1,6 +1,7 @@
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { Page, pages } from "@/lib/db/schema/page";
+import { Post, posts } from "@/lib/db/schema/post";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Separator } from "@/components/ui/Separator";
 import { eq } from "drizzle-orm";
@@ -9,26 +10,29 @@ import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/Button";
 import { orgs } from "@/lib/db/schema/org";
 import PageListViewItem from "@/components/Page/PageListViewItem";
+import EditorOutput from "@/components/Editor/EditorOutput";
+import PostComponent from "@/components/Post/Post";
 
 interface pageProps {
   params: {
-    orgId: string;
+    pageId: string;
   };
 }
 
 const page: FC<pageProps> = async ({ params }) => {
-  const { orgId } = params;
+  const { pageId } = params;
 
   const session = await getAuthSession();
-  const currOrg = await db.query.orgs.findFirst({
-    where: eq(orgs.id, orgId),
-    with: { pages: true },
+  const currPage = await db.query.pages.findFirst({
+    where: eq(pages.id, pageId),
   });
 
-  let orgPages: Page[] = [];
-  if (currOrg) {
-    orgPages = await db.query.pages.findMany({
-      where: eq(pages.orgId, currOrg.id),
+  console.log(currPage);
+
+  let pagePosts: Post[] = [];
+  if (currPage) {
+    pagePosts = await db.query.posts.findMany({
+      where: eq(posts.pageId, currPage.id),
     });
   }
 
@@ -39,25 +43,25 @@ const page: FC<pageProps> = async ({ params }) => {
           <CardHeader>
             <img
               className="h-10 w-10 object-cover"
-              alt={currOrg?.name || "" + " logo"}
+              alt={currPage?.name || "" + " logo"}
               src={
-                currOrg
-                  ? currOrg.orgImageUrl
+                currPage
+                  ? currPage.pageImageUrl
                   : "https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
               }
             />
-            {currOrg?.name}
+            {currPage?.name}
           </CardHeader>
           <Separator />
-          <CardContent>Description: {currOrg?.desc}</CardContent>
+          <CardContent>Description: {currPage?.desc}</CardContent>
           <Separator />
         </Card>
       </div>
       <div className="w-[50%] flex flex-col gap-4">
         <h1 className="text-xl">Pages</h1>
         <div className="flex flex-col gap-4">
-          {orgPages.map((page, index) => (
-            <PageListViewItem key={index} page={page} />
+          {pagePosts.map((post, index) => (
+            <PostComponent key={index} post={post} />
           ))}
         </div>
       </div>

@@ -12,6 +12,7 @@ import { relations } from "drizzle-orm";
 import { pages } from "./page";
 import { postLabels } from "./post-label";
 import { postUserRegistration } from "./post-user";
+import { createInsertSchema } from "drizzle-zod";
 
 export const allowedUserEnum = pgEnum("allowedUser", [
   "All",
@@ -29,7 +30,9 @@ export const posts = pgTable(
     title: varchar("title", { length: 120 }).notNull(),
     price: integer("price").notNull().default(0),
     content: json("json"),
-    allowedUsers: allowedUserEnum("allowedUsers").notNull().default("Page Members Only"),
+    allowedUsers: allowedUserEnum("allowedUsers")
+      .notNull()
+      .default("Page Members Only"),
     max_registrations: integer("max_registrations").notNull().default(0),
     pageId: varchar("pageId", { length: 12 })
       .notNull()
@@ -52,6 +55,8 @@ export const postRelations = relations(posts, ({ one, many }) => ({
   labelOfPost: many(postLabels),
   postUserRegistration: many(postUserRegistration),
 }));
+
+export const deletePostValidator = createInsertSchema(posts).pick({ id: true });
 
 export type Post = typeof posts.$inferSelect;
 export type NewPost = typeof posts.$inferInsert;
