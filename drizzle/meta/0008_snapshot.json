@@ -1,6 +1,6 @@
 {
-  "id": "561509a2-f1ef-49e8-be83-6ea52af3e4b2",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "816f572a-002d-4da8-b12b-2078115ab8c2",
+  "prevId": "b401ce80-dd8b-4574-bebf-b02fcc8bd5a6",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -210,63 +210,6 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "pageMembershipRequests": {
-      "name": "pageMembershipRequests",
-      "schema": "",
-      "columns": {
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "pageId": {
-          "name": "pageId",
-          "type": "varchar(12)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "pageMembershipRequests_userId_user_id_fk": {
-          "name": "pageMembershipRequests_userId_user_id_fk",
-          "tableFrom": "pageMembershipRequests",
-          "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "pageMembershipRequests_pageId_pages_id_fk": {
-          "name": "pageMembershipRequests_pageId_pages_id_fk",
-          "tableFrom": "pageMembershipRequests",
-          "tableTo": "pages",
-          "columnsFrom": [
-            "pageId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "pageMembershipRequests_userId_pageId_pk": {
-          "name": "pageMembershipRequests_userId_pageId_pk",
-          "columns": [
-            "userId",
-            "pageId"
-          ]
-        }
-      },
-      "uniqueConstraints": {}
-    },
     "pageMemberships": {
       "name": "pageMemberships",
       "schema": "",
@@ -282,6 +225,13 @@
           "type": "varchar(12)",
           "primaryKey": false,
           "notNull": true
+        },
+        "approved": {
+          "name": "approved",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
         }
       },
       "indexes": {},
@@ -525,7 +475,7 @@
         "postId": {
           "name": "postId",
           "type": "varchar(15)",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "labelId": {
@@ -564,15 +514,7 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {
-        "postLabels_labelId_postId_pk": {
-          "name": "postLabels_labelId_postId_pk",
-          "columns": [
-            "labelId",
-            "postId"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
     "postUserRegistration": {

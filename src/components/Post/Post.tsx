@@ -5,7 +5,7 @@ import { formatTimeToNow } from "@/lib/utils";
 import { MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { FC, useRef } from "react";
-import EditorOutput from "./EditorOutput";
+import EditorOutput from "../Editor/EditorOutput";
 import { Post as PostType } from "@/lib/db/schema/post";
 import { User } from "@/lib/db/schema/user";
 

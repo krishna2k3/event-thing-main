@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import { Icons } from "./Icons";
+import { Icons } from "../Icons";
 import UserAuthForm from "./UserAuthForm";
 
 interface SignInProps {}

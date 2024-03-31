@@ -1,12 +1,16 @@
 import { Page } from "@/lib/db/schema/page";
 import { FC } from "react";
-import { Link } from "lucide-react";
+import { Link as LinkIcon } from "lucide-react";
+import Link from "next/link";
+import { classNames } from "uploadthing/client";
 
-interface PageListViewProps {
+interface ModeratorPageListViewProps {
   page: Page;
 }
 
-const PageListViewItem: FC<PageListViewProps> = async ({ page }) => {
+const ModeratorPageListView: FC<ModeratorPageListViewProps> = async ({
+  page,
+}) => {
   return (
     <div>
       <div className="flex flex-row justify-between">
@@ -23,7 +27,10 @@ const PageListViewItem: FC<PageListViewProps> = async ({ page }) => {
           <div className="flex flex-col">
             <p className="text-md">{page.name}</p>
             <p className="text-small text-default-500">
-              <Link href={`/settings/page/${page.id}`}>page/{page.id}</Link>
+              <Link href={`/settings/page/${page.id}`} className="flex">
+                <LinkIcon />
+                page/{page.id}
+              </Link>
             </p>
           </div>
         </div>
@@ -32,4 +39,4 @@ const PageListViewItem: FC<PageListViewProps> = async ({ page }) => {
   );
 };
 
-export default PageListViewItem;
+export default ModeratorPageListView;

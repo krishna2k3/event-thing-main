@@ -9,9 +9,9 @@ import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 import { UploadDropzone } from "@/lib/uploadthing";
 import { toast } from "sonner";
-import { Button } from "./ui/Button";
+import { Button } from "../ui/Button";
 import { Loader2 } from "lucide-react";
-import { Input } from "./ui/Input";
+import { Input } from "../ui/Input";
 import {
   Form,
   FormControl,
@@ -19,8 +19,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/Form";
-import { Textarea } from "./ui/Textarea";
+} from "../ui/Form";
+import { Textarea } from "../ui/Textarea";
 
 interface pageProps {}
 

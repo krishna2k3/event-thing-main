@@ -49,7 +49,7 @@ export const postRelations = relations(posts, ({ one, many }) => ({
     fields: [posts.pageId],
     references: [pages.id],
   }),
-  postLabels: many(postLabels),
+  labelOfPost: many(postLabels),
   postUserRegistration: many(postUserRegistration),
 }));
 

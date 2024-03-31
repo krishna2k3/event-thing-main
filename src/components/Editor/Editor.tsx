@@ -14,14 +14,14 @@ import axios from "axios";
 
 import "@/styles/editor.css";
 import { toast } from "sonner";
-import { Input } from "./ui/Input";
+import { Input } from "../ui/Input";
 import {
   Select,
   SelectItem,
   SelectTrigger,
   SelectValue,
   SelectContent,
-} from "./ui/Select";
+} from "../ui/Select";
 import {
   Form,
   FormControl,
@@ -29,8 +29,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/Form";
-import { Separator } from "./ui/Separator";
+} from "../ui/Form";
+import { Separator } from "../ui/Separator";
 
 type FormData = z.infer<typeof PostValidator>;
 

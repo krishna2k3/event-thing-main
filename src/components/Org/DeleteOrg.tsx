@@ -1,28 +1,28 @@
 "use client";
-import { Page } from "@/lib/db/schema/page";
+import { ClientOrg } from "@/lib/db/schema/org";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
+import { Button } from "../ui/Button";
 import { toast } from "sonner";
-import { Button } from "./ui/Button";
-import { Loader2 } from "lucide-react";
 
-interface DeletePageProps {
-  page: Page | undefined;
+interface DeleteOrgProps {
+  org: ClientOrg | undefined;
 }
 
-type DeletePage = {
+type DeleteOrg = {
   id: string;
 };
 
-const DeletePage: FC<DeletePageProps> = ({ page }) => {
+const DeleteOrg: FC<DeleteOrgProps> = ({ org }) => {
   const router = useRouter();
-  const { mutate: deletePage, isPending } = useMutation({
+  const { mutate: deleteOrg, isPending } = useMutation({
     mutationFn: async () => {
-      if (page) {
-        const payload: DeletePage = { id: page.id };
-        const { data } = await axios.post("/api/page/delete", payload);
+      if (org) {
+        const payload: DeleteOrg = { id: org.id };
+        const { data } = await axios.post("/api/org/delete", payload);
         return data;
       }
     },
@@ -47,7 +47,7 @@ const DeletePage: FC<DeletePageProps> = ({ page }) => {
 
     onSuccess: (data) => {
       const { name } = data.message;
-      toast(`Page deleted`, {
+      toast(`Organization deleted`, {
         description: `${name} was deleted successfully`,
       });
       router.refresh();
@@ -57,11 +57,12 @@ const DeletePage: FC<DeletePageProps> = ({ page }) => {
     <Button
       variant="destructive"
       disabled={isPending}
-      onClick={() => deletePage()}
+      onClick={() => deleteOrg()}
     >
       {isPending && <Loader2 className="animate-spin" color="white" />}Delete
+      this organisation
     </Button>
   );
 };
 
-export default DeletePage;
+export default DeleteOrg;

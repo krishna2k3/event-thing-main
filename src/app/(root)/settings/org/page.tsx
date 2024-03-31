@@ -11,12 +11,13 @@ import { Link as LinkIcon } from "lucide-react";
 import { Separator } from "@/components/ui/Separator";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import DeleteOrg from "@/components/DeleteOrg";
-import CreateOrgForm from "@/components/CreateOrgForm";
-import CreatePageForm from "@/components/CreatePageForm";
+import DeleteOrg from "@/components/Org/DeleteOrg";
+import CreateOrgForm from "@/components/Org/CreateOrgForm";
+import CreatePageForm from "@/components/Page/CreatePageForm";
 import { Page, pages } from "@/lib/db/schema/page";
-import DeletePage from "@/components/DeletePage";
-import PageListViewItem from "@/components/PageListViewItem";
+import DeletePage from "@/components/Page/DeletePage";
+import ModeratorPageListView from "@/components/Page/ModeratorPageListView";
+import Link from "next/link";
 
 const page = async ({}) => {
   let org: ClientOrg | undefined;
@@ -68,7 +69,9 @@ const page = async ({}) => {
               <div className="flex flex-col">
                 <p className="text-md">{org.name}</p>
                 <p className="text-small text-default-500">
-                  <LinkIcon href={orgUrl}>org/{org.id}</LinkIcon>
+                  <Link href={orgUrl} className="flex">
+                    <LinkIcon /> org/{org.id}
+                  </Link>
                 </p>
               </div>
             </CardHeader>
@@ -100,7 +103,7 @@ const page = async ({}) => {
                     key={page.id}
                     className="flex flex-row justify-between"
                   >
-                    <PageListViewItem page={page} />
+                    <ModeratorPageListView page={page} />
                     <div>
                       <DeletePage page={page} />
                     </div>

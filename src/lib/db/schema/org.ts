@@ -5,12 +5,12 @@ import {
   varchar,
   boolean,
   index,
-} from "drizzle-orm/pg-core";;
+} from "drizzle-orm/pg-core";
 import { users } from "./user";
 import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
-import { orgMembershipRequests, orgMemberships } from "./org-user";
+import { orgMemberships } from "./org-user";
 import { pages } from "./page";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { createInsertSchema } from "drizzle-zod";
 
 export const orgs = pgTable(
   "orgs",
@@ -43,7 +43,6 @@ export const orgRelations = relations(orgs, ({ one, many }) => ({
   }),
   pages: many(pages),
   orgMemberships: many(orgMemberships),
-  orgMembershipRequests: many(orgMembershipRequests),
 }));
 
 export const deleteOrgValidator = createInsertSchema(orgs).pick({ id: true });
@@ -90,7 +89,17 @@ export const insertOrgValidator = createInsertSchema(orgs, {
   orgImageUrl: true,
 });
 
-export type ClientOrg = Pick<InferSelectModel<typeof orgs>, "id" | "name" | "desc" | "orgImageUrl" | "orgFileKey" | "orgVerified" | "joinedAt" | "updatedAt">
+export type ClientOrg = Pick<
+  InferSelectModel<typeof orgs>,
+  | "id"
+  | "name"
+  | "desc"
+  | "orgImageUrl"
+  | "orgFileKey"
+  | "orgVerified"
+  | "joinedAt"
+  | "updatedAt"
+>;
 export type NewOrgPayload = Pick<
   InferInsertModel<typeof orgs>,
   "id" | "name" | "desc" | "orgImageUrl" | "orgFileKey"

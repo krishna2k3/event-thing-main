@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FC } from "react";
 import { Button, buttonVariants } from "./ui/Button";
 import { getAuthSession } from "@/lib/auth";
-import UserAccountNav from "./UserAccountNav";
+import UserAccountNav from "./Auth/UserAccountNav";
 import { Icons } from "./Icons";
 
 interface NavbarProps {}

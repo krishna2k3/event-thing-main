@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FC } from "react";
-import SignIn from "@/components/SignIn";
+import SignIn from "@/components/Auth/SignIn";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";

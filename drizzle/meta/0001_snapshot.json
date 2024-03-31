@@ -1,6 +1,6 @@
 {
-  "id": "ac087a50-c936-4372-8eb7-8776eea041e8",
-  "prevId": "c5f68edd-ae4b-48fc-8429-f3ac26d8a701",
+  "id": "293a9fc5-b318-4cab-84de-af64b0fa8b06",
+  "prevId": "561509a2-f1ef-49e8-be83-6ea52af3e4b2",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -42,63 +42,6 @@
         }
       }
     },
-    "orgMembershipRequests": {
-      "name": "orgMembershipRequests",
-      "schema": "",
-      "columns": {
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "orgId": {
-          "name": "orgId",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "orgMembershipRequests_userId_user_id_fk": {
-          "name": "orgMembershipRequests_userId_user_id_fk",
-          "tableFrom": "orgMembershipRequests",
-          "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "orgMembershipRequests_orgId_orgs_id_fk": {
-          "name": "orgMembershipRequests_orgId_orgs_id_fk",
-          "tableFrom": "orgMembershipRequests",
-          "tableTo": "orgs",
-          "columnsFrom": [
-            "orgId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "orgMembershipRequests_userId_orgId_pk": {
-          "name": "orgMembershipRequests_userId_orgId_pk",
-          "columns": [
-            "userId",
-            "orgId"
-          ]
-        }
-      },
-      "uniqueConstraints": {}
-    },
     "orgMemberships": {
       "name": "orgMemberships",
       "schema": "",
@@ -114,6 +57,13 @@
           "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
+        },
+        "approved": {
+          "name": "approved",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
         }
       },
       "indexes": {},
@@ -566,63 +516,6 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "postLabels": {
-      "name": "postLabels",
-      "schema": "",
-      "columns": {
-        "postId": {
-          "name": "postId",
-          "type": "varchar(15)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "labelId": {
-          "name": "labelId",
-          "type": "varchar(10)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "postLabels_postId_posts_id_fk": {
-          "name": "postLabels_postId_posts_id_fk",
-          "tableFrom": "postLabels",
-          "tableTo": "posts",
-          "columnsFrom": [
-            "postId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "postLabels_labelId_labels_id_fk": {
-          "name": "postLabels_labelId_labels_id_fk",
-          "tableFrom": "postLabels",
-          "tableTo": "labels",
-          "columnsFrom": [
-            "labelId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "postLabels_labelId_postId_pk": {
-          "name": "postLabels_labelId_postId_pk",
-          "columns": [
-            "labelId",
-            "postId"
-          ]
-        }
-      },
       "uniqueConstraints": {}
     },
     "postUserRegistration": {

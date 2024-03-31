@@ -20,7 +20,7 @@ export const labels = pgTable(
 );
 
 export const labelRelations = relations(labels, ({ many }) => ({
-  postLabels: many(postLabels),
+  postsWithLabel: many(postLabels),
 }));
 
 export type Label = typeof labels.$inferSelect;

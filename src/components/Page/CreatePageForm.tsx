@@ -9,9 +9,9 @@ import { redirect, useRouter } from "next/navigation";
 import { UploadDropzone } from "@/lib/uploadthing";
 import { NewPagePayload, insertPageValidator } from "@/lib/db/schema/page";
 import { Loader2 } from "lucide-react";
-import { Button } from "./ui/Button";
+import { Button } from "../ui/Button";
 import { toast } from "sonner";
-import { Input } from "./ui/Input";
+import { Input } from "../ui/Input";
 import {
   Form,
   FormControl,
@@ -19,9 +19,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/Form";
-import { Textarea } from "./ui/Textarea";
-import { Progress } from "./ui/Progress";
+} from "../ui/Form";
+import { Textarea } from "../ui/Textarea";
+import { Progress } from "../ui/Progress";
 
 interface pageProps {}
 

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
 import * as React from "react";
 import { FC } from "react";
-import { Icons } from "./Icons";
+import { Icons } from "../Icons";
 import { Button } from "@/components/ui/Button";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";

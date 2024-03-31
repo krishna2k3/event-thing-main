@@ -3,11 +3,11 @@ import { db } from "@/lib/db";
 import { ClientOrg, orgs } from "@/lib/db/schema/org";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import DeleteOrg from "@/components/DeleteOrg";
-import CreateOrgForm from "@/components/CreateOrgForm";
-import CreatePageForm from "@/components/CreatePageForm";
+import DeleteOrg from "@/components/Org/DeleteOrg";
+import CreateOrgForm from "@/components/Org/CreateOrgForm";
+import CreatePageForm from "@/components/Page/CreatePageForm";
 import { Page, pages } from "@/lib/db/schema/page";
-import DeletePage from "@/components/DeletePage";
+import DeletePage from "@/components/Page/DeletePage";
 import {
   Card,
   CardContent,

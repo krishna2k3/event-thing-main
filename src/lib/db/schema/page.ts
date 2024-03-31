@@ -10,7 +10,6 @@ import { InferSelectModel, relations } from "drizzle-orm";
 import { users } from "./user";
 import { orgs } from "./org";
 import {
-  pageMembershipRequests,
   pageMemberships,
   pageSubscriptions,
 } from "./page-user";
@@ -57,7 +56,6 @@ export const pageRelations = relations(pages, ({ one, many }) => ({
   }),
   posts: many(posts),
   pageMemberships: many(pageMemberships),
-  pageMembershipRequests: many(pageMembershipRequests),
   pageSubscriptions: many(pageSubscriptions),
 }));
 

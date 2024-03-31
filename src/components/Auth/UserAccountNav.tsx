@@ -10,11 +10,11 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuPortal,
   DropdownMenuSubContent,
-} from "./ui/DropdownMenu";
+} from "../ui/DropdownMenu";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/Avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar";
 import { Session } from "next-auth";
 
 interface UserAccountNavProps {

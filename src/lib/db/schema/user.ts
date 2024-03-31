@@ -8,9 +8,8 @@ import {
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 import { relations } from "drizzle-orm";
-import { orgMembershipRequests, orgMemberships } from "./org-user";
+import { orgMemberships } from "./org-user";
 import {
-  pageMembershipRequests,
   pageMemberships,
   pageSubscriptions,
 } from "./page-user";
@@ -32,9 +31,7 @@ export const users = pgTable("user", {
 
 export const userRelations = relations(users, ({ many }) => ({
   orgMemberships: many(orgMemberships),
-  orgMembershipRequests: many(orgMembershipRequests),
   pageMemberships: many(pageMemberships),
-  pageMembershipRequests: many(pageMembershipRequests),
   pageSubscriptions: many(pageSubscriptions),
   postUserRegistration: many(postUserRegistration),
 }));

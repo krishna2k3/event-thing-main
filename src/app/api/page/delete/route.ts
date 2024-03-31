@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           title: `Delete all the posts first`,
-          message: `You need to delete your pages before you can delete your organisation`,
+          message: `You need to delete your posts before you can delete your page`,
         },
         { status: 400 }
       );

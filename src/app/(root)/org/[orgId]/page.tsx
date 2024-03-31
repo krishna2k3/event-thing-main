@@ -1,18 +1,18 @@
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { pages } from "@/lib/db/schema/page";
+import { Page, pages } from "@/lib/db/schema/page";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Separator } from "@/components/ui/Separator";
 import { eq } from "drizzle-orm";
 import { FC } from "react";
-import { posts } from "@/lib/db/schema/post";
-import Post from "@/components/Post/Post";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/Button";
+import { orgs } from "@/lib/db/schema/org";
+import PageListViewItem from "@/components/Page/PageListViewItem";
 
 interface pageProps {
   params: {
-    pageId: string;
+    orgId: string;
   };
 }
 
@@ -21,17 +21,20 @@ const Editor = dynamic(() => import("@/components/Editor/Editor"), {
 });
 
 const page: FC<pageProps> = async ({ params }) => {
-  const { pageId } = params;
+  const { orgId } = params;
 
   const session = await getAuthSession();
-  const currpage = await db.query.pages.findFirst({
-    where: eq(pages.id, pageId),
-    with: { pageOf: true },
+  const currOrg = await db.query.orgs.findFirst({
+    where: eq(orgs.id, orgId),
+    with: { pages: true },
   });
 
-  const pageposts = await db.query.posts.findMany({
-    where: eq(posts.pageId, pageId),
-  });
+  let orgPages: Page[] = [];
+  if (currOrg) {
+    orgPages = await db.query.pages.findMany({
+      where: eq(pages.orgId, currOrg.id),
+    });
+  }
 
   return (
     <div className="flex gap-4">
@@ -40,34 +43,25 @@ const page: FC<pageProps> = async ({ params }) => {
           <CardHeader>
             <img
               className="h-10 w-10 object-cover"
-              alt={page.name + " logo"}
+              alt={currOrg?.name || "" + " logo"}
               src={
-                currpage
-                  ? currpage.pageImageUrl
+                currOrg
+                  ? currOrg.orgImageUrl
                   : "https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
               }
             />
-            {currpage?.name}
+            {currOrg?.name}
           </CardHeader>
           <Separator />
-          <CardContent>Description: {currpage?.desc}</CardContent>
+          <CardContent>Description: {currOrg?.desc}</CardContent>
           <Separator />
-          <CardContent>A page of {currpage?.pageOf.name}</CardContent>
         </Card>
-        <Editor pageId={pageId} />
-        <div className="w-auto flex justify-start">
-          <Button type="submit" className="w-auto" form="subreddit-post-form">
-            Post
-          </Button>
-        </div>
       </div>
       <div className="w-[50%] flex flex-col gap-4">
-        <h1 className="text-xl">Posts</h1>
+        <h1 className="text-xl">Pages</h1>
         <div className="flex flex-col gap-4">
-          {pageposts.map((post, index) => (
-            <Card>
-              <Post key={post.id} post={post} />
-            </Card>
+          {orgPages.map((page, index) => (
+            <PageListViewItem key={index} page={page} />
           ))}
         </div>
       </div>
