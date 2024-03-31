@@ -2,7 +2,6 @@ import { Page } from "@/lib/db/schema/page";
 import { FC } from "react";
 import { Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
-import { classNames } from "uploadthing/client";
 
 interface ModeratorPageListViewProps {
   page: Page;

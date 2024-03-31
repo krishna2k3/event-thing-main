@@ -1,8 +1,7 @@
 import { Page } from "@/lib/db/schema/page";
 import { FC } from "react";
-import { Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/Card";
+import { Card, CardContent, CardFooter } from "../ui/Card";
 
 interface PageListViewProps {
   page: Page;
