@@ -65,7 +65,7 @@ const page: FC<pageProps> = async ({ params }) => {
         <h1 className="text-xl">Posts</h1>
         <div className="flex flex-col gap-4">
           {pageposts.map((post, index) => (
-            <Card>
+            <Card key={index}>
               <ModeratorPost key={post.id} post={post} />
             </Card>
           ))}
