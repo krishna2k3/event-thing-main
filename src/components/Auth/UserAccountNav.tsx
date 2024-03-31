@@ -6,17 +6,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuPortal,
-  DropdownMenuSubContent,
 } from "../ui/DropdownMenu";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar";
 import { Session } from "next-auth";
-
+import {signOut} from "next-auth/react"
 interface UserAccountNavProps {
   session: Session | null;
 }
@@ -24,16 +20,15 @@ interface UserAccountNavProps {
 const UserAccountNav: FC<UserAccountNavProps> = ({ session }) => {
   const router = useRouter();
   const logoutHandler = async () => {
-    // await axios(CSRBaseUrl + "authenticate/logout/", {
-    //   withCredentials: true,
-    //   method: "post",
-    // });
+    signOut({
+      callbackUrl: `${window.location.origin}/sign-in`,
+    });
 
     toast("Success", {
       description: "You were logged out successfully.",
     });
     // console.log("inDevEnv", inDevEnvironment);
-    router.push("/login");
+    router.push("/sign-in");
     router.refresh();
   };
   return (
