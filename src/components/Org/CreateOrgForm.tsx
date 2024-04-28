@@ -65,6 +65,11 @@ const CreateOrgForm: FC<pageProps> = ({}) => {
             description: `Your input is not correct`,
           });
         }
+        if (err.response?.status === 401) {
+          toast(`Please check your input`, {
+            description: `An organisation with the same handle already exists`,
+          });
+        }
       } else {
         toast(`Some other error occurred`, {
           description: `Please try again later`,
@@ -152,11 +157,13 @@ const CreateOrgForm: FC<pageProps> = ({}) => {
                 }}
                 onUploadError={(error: Error) => {
                   // Do something with the error.
+                  console.log(error);
                   toast("Some error occured while uploading the image", {
                     description:
                       "Please check the image file size and format. Else try again later.",
                   });
                 }}
+                onUploadBegin={(file) => console.log(file)}
               />
             ) : (
               <img alt={"logo"} height={240} src={orgImageUrl} width={240} />

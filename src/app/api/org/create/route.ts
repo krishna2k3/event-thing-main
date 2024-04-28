@@ -1,6 +1,7 @@
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { insertOrgValidator, orgs } from "@/lib/db/schema/org";
+import { NeonDbError } from "@neondatabase/serverless";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
@@ -44,6 +45,15 @@ export async function POST(request: NextRequest) {
           status: 400,
         }
       );
+    }
+
+    else if(error instanceof NeonDbError){
+      if(error.code === "23505"){
+        return NextResponse.json(
+          { message: "An organisation with the same handle already exists" },
+          { status: 401 }
+        );
+      }
     }
     return NextResponse.json(
       { message: "Internal server error" },
