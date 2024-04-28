@@ -1,6 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UTApi } from "uploadthing/server";
+import { UploadThingError, UTApi } from "uploadthing/server";
 
 const f = createUploadthing();
 
@@ -14,7 +14,7 @@ export const ourFileRouter = {
       console.log(req);
       const user = await getToken({ req });
       console.log("User =", user);
-      if (!user) throw new Error("Unauthorized");
+      if (!user) throw new UploadThingError({message: "user " + user, code: "BAD_REQUEST"});
 
       return { userId: user.id };
     })
