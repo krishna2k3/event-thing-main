@@ -14,7 +14,7 @@ export const ourFileRouter = {
       console.log(req);
       const user = await getToken({ req });
       console.log("User =", user);
-      if (!user) throw new UploadThingError({message: "user " + user, code: "BAD_REQUEST"});
+      if (!user) throw new UploadThingError({message: "user " + user + "\nreq " + req, code: "BAD_REQUEST"});
 
       return { userId: user.id };
     })
